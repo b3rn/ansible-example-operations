@@ -1,0 +1,13 @@
+---
+- name: Remove a user
+  hosts: all
+  gather_facts: no
+  become: yes
+  vars_prompt:
+    - name: user
+      prompt: User
+  tasks:
+    - name: Ensure the user is removed
+      user:
+        name: "{{ user }}"
+        state: absent

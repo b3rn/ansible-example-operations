@@ -1,0 +1,19 @@
+---
+- name: Add a user
+  hosts: all
+  gather_facts: no
+  become: yes
+  vars_prompt:
+    - name: user
+      prompt: User
+    - name: password
+      prompt: Password
+      private: yes
+  tasks:
+    - name: Create the user
+      user:
+        name: "{{ user }}"
+        createhome: yes
+        shell: "{{ shell | default('/bin/bash') }}"
+        password: "{{ password }}"
+        state: present

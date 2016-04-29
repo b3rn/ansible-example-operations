@@ -1,0 +1,11 @@
+---
+- name: Disable a user
+  hosts: all
+  gather_facts: no
+  become: yes
+  vars_prompt:
+    - name: user
+      prompt: User
+  tasks:
+    - name: Remove the users password
+      shell: passwd --delete {{ user }}
